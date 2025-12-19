@@ -1,0 +1,1048 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Thiệp Mời Tiệc</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Georgia", serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+        overflow-x: hidden;
+      }
+
+      /* Intro Animation */
+      .intro-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: radial-gradient(circle at center, #1a1a2e 0%, #0f0f1e 100%);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+        animation: fadeOutIntro 1.5s ease-out 7s forwards;
+      }
+
+      .intro-overlay.hidden {
+        display: none;
+      }
+
+      @keyframes fadeOutIntro {
+        to {
+          opacity: 0;
+          visibility: hidden;
+        }
+      }
+
+      /* Particles Background */
+      .particles {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+      }
+
+      .particle {
+        position: absolute;
+        background: rgba(255, 255, 255, 0.5);
+        border-radius: 50%;
+        animation: floatParticle 20s infinite;
+      }
+
+      .particle:nth-child(1) {
+        width: 3px;
+        height: 3px;
+        left: 10%;
+        animation-delay: 0s;
+      }
+      .particle:nth-child(2) {
+        width: 5px;
+        height: 5px;
+        left: 20%;
+        animation-delay: 2s;
+      }
+      .particle:nth-child(3) {
+        width: 4px;
+        height: 4px;
+        left: 30%;
+        animation-delay: 4s;
+      }
+      .particle:nth-child(4) {
+        width: 6px;
+        height: 6px;
+        left: 40%;
+        animation-delay: 1s;
+      }
+      .particle:nth-child(5) {
+        width: 3px;
+        height: 3px;
+        left: 50%;
+        animation-delay: 5s;
+      }
+      .particle:nth-child(6) {
+        width: 5px;
+        height: 5px;
+        left: 60%;
+        animation-delay: 3s;
+      }
+      .particle:nth-child(7) {
+        width: 4px;
+        height: 4px;
+        left: 70%;
+        animation-delay: 6s;
+      }
+      .particle:nth-child(8) {
+        width: 3px;
+        height: 3px;
+        left: 80%;
+        animation-delay: 2s;
+      }
+      .particle:nth-child(9) {
+        width: 5px;
+        height: 5px;
+        left: 90%;
+        animation-delay: 4s;
+      }
+      .particle:nth-child(10) {
+        width: 4px;
+        height: 4px;
+        left: 15%;
+        animation-delay: 1s;
+      }
+
+      @keyframes floatParticle {
+        0% {
+          top: 120%;
+          opacity: 0;
+        }
+        10% {
+          opacity: 1;
+        }
+        90% {
+          opacity: 1;
+        }
+        100% {
+          top: -10%;
+          opacity: 0;
+        }
+      }
+
+      /* Envelope Container */
+      .envelope-wrapper {
+        perspective: 1000px;
+        margin-bottom: 60px;
+        animation: envelopeEntrance 1.5s ease-out;
+      }
+
+      @keyframes envelopeEntrance {
+        0% {
+          opacity: 0;
+          transform: scale(0.5) rotateY(180deg);
+        }
+        100% {
+          opacity: 1;
+          transform: scale(1) rotateY(0deg);
+        }
+      }
+
+      .envelope-container {
+        position: relative;
+        width: 400px;
+        height: 280px;
+        transform-style: preserve-3d;
+      }
+
+      /* Envelope Body */
+      .envelope-body {
+        position: absolute;
+        width: 400px;
+        height: 280px;
+        background: linear-gradient(145deg, #ffffff 0%, #f0f0f0 100%);
+        border-radius: 8px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5),
+          inset 0 0 20px rgba(0, 0, 0, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+      }
+
+      /* Envelope Flap */
+      .envelope-flap {
+        position: absolute;
+        width: 0;
+        height: 0;
+        border-left: 200px solid transparent;
+        border-right: 200px solid transparent;
+        border-top: 160px solid #c0392b;
+        top: 0;
+        left: 0;
+        transform-origin: top center;
+        z-index: 3;
+        filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.3));
+        animation: openFlap 2s ease-in-out 2.5s forwards;
+      }
+
+      @keyframes openFlap {
+        0% {
+          transform: rotateX(0deg);
+        }
+        100% {
+          transform: rotateX(-180deg);
+        }
+      }
+
+      /* Envelope Bottom Triangles */
+      .envelope-bottom {
+        position: absolute;
+        width: 0;
+        height: 0;
+        border-left: 200px solid transparent;
+        border-right: 200px solid transparent;
+        border-bottom: 120px solid #e8e8e8;
+        bottom: 0;
+        left: 0;
+        z-index: 2;
+        filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.2));
+      }
+
+      /* Decorative Seal */
+      .envelope-seal {
+        position: absolute;
+        width: 60px;
+        height: 60px;
+        background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+        border-radius: 50%;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 4;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 30px;
+        box-shadow: 0 5px 20px rgba(255, 215, 0, 0.5);
+        animation: sealPulse 2s ease-in-out infinite,
+          sealBreak 0.5s ease-out 2.5s forwards;
+      }
+
+      @keyframes sealPulse {
+        0%,
+        100% {
+          transform: translate(-50%, -50%) scale(1);
+        }
+        50% {
+          transform: translate(-50%, -50%) scale(1.1);
+        }
+      }
+
+      @keyframes sealBreak {
+        0% {
+          transform: translate(-50%, -50%) scale(1);
+          opacity: 1;
+        }
+        100% {
+          transform: translate(-50%, -50%) scale(2);
+          opacity: 0;
+        }
+      }
+
+      /* Letter */
+      .letter {
+        position: absolute;
+        width: 360px;
+        height: 240px;
+        background: linear-gradient(
+          135deg,
+          #667eea 0%,
+          #764ba2 50%,
+          #f093fb 100%
+        );
+        top: 20px;
+        left: 20px;
+        border-radius: 8px;
+        z-index: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        text-align: center;
+        padding: 30px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        animation: pullOutLetter 2s ease-out 3s forwards;
+        opacity: 0;
+      }
+
+      @keyframes pullOutLetter {
+        0% {
+          transform: translateY(0) scale(1);
+          opacity: 0;
+        }
+        50% {
+          opacity: 1;
+        }
+        100% {
+          transform: translateY(-350px) scale(1.1);
+          opacity: 1;
+        }
+      }
+
+      .letter-icon {
+        font-size: 80px;
+        margin-bottom: 20px;
+        animation: heartBeat 1.5s ease-in-out infinite 5s;
+        filter: drop-shadow(0 5px 10px rgba(0, 0, 0, 0.3));
+      }
+
+      @keyframes heartBeat {
+        0%,
+        100% {
+          transform: scale(1);
+        }
+        10%,
+        30% {
+          transform: scale(1.2);
+        }
+        20%,
+        40% {
+          transform: scale(1.1);
+        }
+      }
+
+      .letter-title {
+        font-size: 2.5em;
+        font-weight: bold;
+        margin-bottom: 15px;
+        text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+        letter-spacing: 2px;
+      }
+
+      .letter-subtitle {
+        font-size: 1.3em;
+        opacity: 0.95;
+        text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2);
+      }
+
+      /* Glitter Effect */
+      .glitter {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+      }
+
+      .glitter-particle {
+        position: absolute;
+        width: 4px;
+        height: 4px;
+        background: white;
+        border-radius: 50%;
+        animation: glitterFall 3s ease-in-out infinite;
+      }
+
+      .glitter-particle:nth-child(odd) {
+        background: #ffd700;
+      }
+
+      .glitter-particle:nth-child(1) {
+        left: 10%;
+        animation-delay: 3s;
+      }
+      .glitter-particle:nth-child(2) {
+        left: 20%;
+        animation-delay: 3.2s;
+      }
+      .glitter-particle:nth-child(3) {
+        left: 30%;
+        animation-delay: 3.4s;
+      }
+      .glitter-particle:nth-child(4) {
+        left: 40%;
+        animation-delay: 3.1s;
+      }
+      .glitter-particle:nth-child(5) {
+        left: 50%;
+        animation-delay: 3.6s;
+      }
+      .glitter-particle:nth-child(6) {
+        left: 60%;
+        animation-delay: 3.3s;
+      }
+      .glitter-particle:nth-child(7) {
+        left: 70%;
+        animation-delay: 3.5s;
+      }
+      .glitter-particle:nth-child(8) {
+        left: 80%;
+        animation-delay: 3.7s;
+      }
+      .glitter-particle:nth-child(9) {
+        left: 90%;
+        animation-delay: 3.9s;
+      }
+      .glitter-particle:nth-child(10) {
+        left: 15%;
+        animation-delay: 3.8s;
+      }
+      .glitter-particle:nth-child(11) {
+        left: 25%;
+        animation-delay: 4s;
+      }
+      .glitter-particle:nth-child(12) {
+        left: 35%;
+        animation-delay: 4.2s;
+      }
+      .glitter-particle:nth-child(13) {
+        left: 45%;
+        animation-delay: 4.1s;
+      }
+      .glitter-particle:nth-child(14) {
+        left: 55%;
+        animation-delay: 4.3s;
+      }
+      .glitter-particle:nth-child(15) {
+        left: 65%;
+        animation-delay: 4.5s;
+      }
+      .glitter-particle:nth-child(16) {
+        left: 75%;
+        animation-delay: 4.4s;
+      }
+      .glitter-particle:nth-child(17) {
+        left: 85%;
+        animation-delay: 4.6s;
+      }
+      .glitter-particle:nth-child(18) {
+        left: 5%;
+        animation-delay: 4.8s;
+      }
+      .glitter-particle:nth-child(19) {
+        left: 95%;
+        animation-delay: 5s;
+      }
+      .glitter-particle:nth-child(20) {
+        left: 50%;
+        animation-delay: 5.2s;
+      }
+
+      @keyframes glitterFall {
+        0% {
+          top: -5%;
+          opacity: 0;
+          transform: scale(0) rotate(0deg);
+        }
+        10% {
+          opacity: 1;
+          transform: scale(1) rotate(180deg);
+        }
+        90% {
+          opacity: 1;
+        }
+        100% {
+          top: 105%;
+          opacity: 0;
+          transform: scale(0) rotate(720deg);
+        }
+      }
+
+      /* Text Animation */
+      .intro-message {
+        text-align: center;
+        color: white;
+        margin-top: 80px;
+        opacity: 0;
+        animation: fadeInUp 1.5s ease-out 5.5s forwards;
+      }
+
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .intro-message h2 {
+        font-size: 2.5em;
+        margin-bottom: 15px;
+        background: linear-gradient(135deg, #ffd700, #ff6b6b, #4ecdc4);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        animation: gradientShift 3s ease-in-out infinite;
+      }
+
+      @keyframes gradientShift {
+        0%,
+        100% {
+          filter: hue-rotate(0deg);
+        }
+        50% {
+          filter: hue-rotate(45deg);
+        }
+      }
+
+      .intro-message p {
+        font-size: 1.4em;
+        opacity: 0.9;
+      }
+
+      /* Main Content */
+      .main-content {
+        opacity: 0;
+        animation: fadeInMain 1.5s ease-out 8s forwards;
+      }
+
+      @keyframes fadeInMain {
+        to {
+          opacity: 1;
+        }
+      }
+
+      .invitation-container {
+        background: white;
+        border-radius: 20px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        max-width: 800px;
+        width: 100%;
+        overflow: hidden;
+        animation: slideIn 1.5s ease-out 8s backwards;
+      }
+
+      @keyframes slideIn {
+        from {
+          opacity: 0;
+          transform: translateY(-50px) scale(0.9);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+        }
+      }
+
+      .header {
+        background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        padding: 40px;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .header::before {
+        content: "🎉";
+        position: absolute;
+        font-size: 100px;
+        opacity: 0.1;
+        top: -20px;
+        left: -20px;
+        animation: float 3s ease-in-out infinite;
+      }
+
+      .header::after {
+        content: "🎊";
+        position: absolute;
+        font-size: 100px;
+        opacity: 0.1;
+        bottom: -20px;
+        right: -20px;
+        animation: float 3s ease-in-out infinite 1.5s;
+      }
+
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0px) rotate(0deg);
+        }
+        50% {
+          transform: translateY(-20px) rotate(10deg);
+        }
+      }
+
+      .header h1 {
+        color: white;
+        font-size: 2.5em;
+        margin-bottom: 10px;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        animation: pulse 2s ease-in-out infinite;
+      }
+
+      @keyframes pulse {
+        0%,
+        100% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.05);
+        }
+      }
+
+      .header p {
+        color: white;
+        font-size: 1.2em;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+      }
+
+      .content {
+        padding: 40px;
+      }
+
+      .event-details {
+        text-align: center;
+        margin-bottom: 40px;
+      }
+
+      .event-details h2 {
+        color: #667eea;
+        font-size: 1.8em;
+        margin-bottom: 20px;
+      }
+
+      .detail-item {
+        margin: 15px 0;
+        font-size: 1.1em;
+        color: #555;
+        animation: fadeIn 1s ease-out backwards;
+      }
+
+      .detail-item:nth-child(1) {
+        animation-delay: 8.5s;
+      }
+      .detail-item:nth-child(2) {
+        animation-delay: 8.7s;
+      }
+      .detail-item:nth-child(3) {
+        animation-delay: 8.9s;
+      }
+      .detail-item:nth-child(4) {
+        animation-delay: 9.1s;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateX(-20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+
+      .detail-item strong {
+        color: #764ba2;
+        font-weight: bold;
+      }
+
+      .photo-gallery {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+        margin: 40px 0;
+      }
+
+      .photo-item {
+        position: relative;
+        overflow: hidden;
+        border-radius: 15px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        transition: transform 0.5s ease, box-shadow 0.5s ease;
+        cursor: pointer;
+        height: 200px;
+      }
+
+      .photo-item:hover {
+        transform: translateY(-10px) scale(1.05);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+      }
+
+      .photo-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s ease;
+      }
+
+      .photo-item:hover img {
+        transform: scale(1.2);
+      }
+
+      .photo-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          to top,
+          rgba(0, 0, 0, 0.7) 0%,
+          transparent 100%
+        );
+        display: flex;
+        align-items: flex-end;
+        padding: 20px;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+
+      .photo-item:hover .photo-overlay {
+        opacity: 1;
+      }
+
+      .photo-overlay span {
+        color: white;
+        font-size: 1.1em;
+        font-weight: bold;
+      }
+
+      .photo-item:nth-child(1) {
+        animation: slideInLeft 0.8s ease-out 9.3s backwards;
+      }
+
+      .photo-item:nth-child(2) {
+        animation: slideInRight 0.8s ease-out 9.5s backwards;
+      }
+
+      .photo-item:nth-child(3) {
+        animation: slideInLeft 0.8s ease-out 9.7s backwards;
+      }
+
+      .photo-item:nth-child(4) {
+        animation: slideInRight 0.8s ease-out 9.9s backwards;
+      }
+
+      @keyframes slideInLeft {
+        from {
+          opacity: 0;
+          transform: translateX(-100px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+
+      @keyframes slideInRight {
+        from {
+          opacity: 0;
+          transform: translateX(100px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+
+      .message {
+        text-align: center;
+        font-style: italic;
+        color: #666;
+        font-size: 1.1em;
+        line-height: 1.6;
+        margin: 30px 0;
+        padding: 20px;
+        background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+        border-radius: 10px;
+        animation: fadeIn 1s ease-out 10.1s backwards;
+      }
+
+      .rsvp-button {
+        display: block;
+        width: 200px;
+        margin: 30px auto;
+        padding: 15px 30px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        text-align: center;
+        text-decoration: none;
+        border-radius: 50px;
+        font-size: 1.2em;
+        font-weight: bold;
+        box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        transition: all 0.3s ease;
+        animation: bounceIn 1s ease-out 10.5s backwards;
+      }
+
+      @keyframes bounceIn {
+        0% {
+          opacity: 0;
+          transform: scale(0.3);
+        }
+        50% {
+          transform: scale(1.1);
+        }
+        70% {
+          transform: scale(0.9);
+        }
+        100% {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+
+      .rsvp-button:hover {
+        transform: scale(1.1);
+        box-shadow: 0 8px 25px rgba(102, 126, 234, 0.6);
+      }
+
+      .footer {
+        background: #f8f9fa;
+        padding: 20px;
+        text-align: center;
+        color: #888;
+        font-size: 0.9em;
+      }
+
+      @media (max-width: 600px) {
+        .envelope-container {
+          width: 300px;
+          height: 210px;
+        }
+
+        .envelope-body {
+          width: 300px;
+          height: 210px;
+        }
+
+        .envelope-flap {
+          border-left: 150px solid transparent;
+          border-right: 150px solid transparent;
+          border-top: 120px solid #c0392b;
+        }
+
+        .envelope-bottom {
+          border-left: 150px solid transparent;
+          border-right: 150px solid transparent;
+          border-bottom: 90px solid #e8e8e8;
+        }
+
+        .letter {
+          width: 270px;
+          height: 180px;
+          left: 15px;
+          top: 15px;
+          padding: 20px;
+        }
+
+        .letter-icon {
+          font-size: 50px;
+        }
+
+        .letter-title {
+          font-size: 1.5em;
+        }
+
+        .letter-subtitle {
+          font-size: 1em;
+        }
+
+        .intro-message h2 {
+          font-size: 1.8em;
+        }
+
+        .intro-message p {
+          font-size: 1.1em;
+        }
+
+        .header h1 {
+          font-size: 1.8em;
+        }
+
+        .photo-gallery {
+          grid-template-columns: 1fr;
+        }
+
+        .content {
+          padding: 20px;
+        }
+      }
+    </style>
+  </head>
+  <audio id="bgMusic" src="nhac/audio.mp4" loop></audio>
+  <script>
+    const music = document.getElementById("bgMusic");
+    let isPlaying = false;
+
+    // Phát nhạc SAU KHI INTRO KẾT THÚC (intro của bạn fade sau 7s)
+    setTimeout(() => {
+      music.volume = 0.4;
+      music
+        .play()
+        .then(() => {
+          isPlaying = true;
+        })
+        .catch(() => {
+          // nếu bị chặn autoplay thì chờ click
+        });
+    }, 7000);
+
+    // Fallback: click lần đầu để bật nhạc (tránh bị chặn)
+    document.addEventListener(
+      "click",
+      () => {
+        if (!isPlaying) {
+          music.volume = 0.4;
+          music.play();
+          isPlaying = true;
+        }
+      },
+      { once: true }
+    );
+  </script>
+  <body>
+    <!-- Intro Animation -->
+    <div class="intro-overlay" id="introOverlay">
+      <!-- Particles Background -->
+      <div class="particles">
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+      </div>
+
+      <!-- Glitter Effect -->
+      <div class="glitter">
+        <div class="glitter-particle"></div>
+        <div class="glitter-particle"></div>
+        <div class="glitter-particle"></div>
+        <div class="glitter-particle"></div>
+        <div class="glitter-particle"></div>
+        <div class="glitter-particle"></div>
+        <div class="glitter-particle"></div>
+        <div class="glitter-particle"></div>
+        <div class="glitter-particle"></div>
+        <div class="glitter-particle"></div>
+        <div class="glitter-particle"></div>
+        <div class="glitter-particle"></div>
+        <div class="glitter-particle"></div>
+        <div class="glitter-particle"></div>
+        <div class="glitter-particle"></div>
+        <div class="glitter-particle"></div>
+        <div class="glitter-particle"></div>
+        <div class="glitter-particle"></div>
+        <div class="glitter-particle"></div>
+        <div class="glitter-particle"></div>
+      </div>
+
+      <!-- Envelope -->
+      <div class="envelope-wrapper">
+        <div class="envelope-container">
+          <div class="envelope-body"></div>
+          <div class="envelope-flap"></div>
+          <div class="envelope-bottom"></div>
+          <div class="envelope-seal">💌</div>
+          <div class="letter">
+            <div class="letter-icon">🎁</div>
+            <div class="letter-title">BẠN ĐƯỢC MỜI</div>
+            <div class="letter-subtitle">Tham dự sự kiện đặc biệt</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Intro Message -->
+      <div class="intro-message">
+        <h2>✨ THIỆP MỜI ĐẶC BIỆT ✨</h2>
+        <p>Một khoảnh khắc không thể bỏ lỡ...</p>
+      </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+      <div class="invitation-container">
+        <div class="header">
+          <h1>🎉 Thiệp Mời Tiệc 🎉</h1>
+          <p>Hân hạnh được mời bạn tham dự tiệc lễ tân Pavillion</p>
+        </div>
+
+        <div class="content">
+          <div class="event-details">
+            <h2>Thông Tin Sự Kiện</h2>
+            <div class="detail-item">
+              <strong>📅 Ngày:</strong> 26 tháng 1, 2025
+            </div>
+            <div class="detail-item"><strong>🕐 Giờ:</strong> 19:00</div>
+            <div class="detail-item">
+              <strong>📍 Địa điểm:</strong> Quán nhậu cây bàng
+            </div>
+            <div class="detail-item">
+              <strong>🎭 Chủ đề:</strong> Tiệc Tất Niên 2025
+            </div>
+          </div>
+
+          <div class="photo-gallery">
+            <div class="photo-item">
+              <img
+                src="https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=600&h=400&fit=crop"
+                alt="Party Photo 1"
+              />
+              <div class="photo-overlay">
+                <span>Không gian tiệc</span>
+              </div>
+            </div>
+            <div class="photo-item">
+              <img
+                src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=600&h=400&fit=crop"
+                alt="Party Photo 2"
+              />
+              <div class="photo-overlay">
+                <span>Món ăn đặc sắc</span>
+              </div>
+            </div>
+            <div class="photo-item">
+              <img
+                src="https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=600&h=400&fit=crop"
+                alt="Party Photo 3"
+              />
+              <div class="photo-overlay">
+                <span>Âm nhạc sôi động</span>
+              </div>
+            </div>
+            <div class="photo-item">
+              <img
+                src="anh/z6228627166423_a401191f8a8ed227f5ac77b51b7c7888.jpg"
+                alt="Party Photo 4"
+              />
+              <div class="photo-overlay">
+                <span>Khoảnh khắc vui vẻ</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="message">
+            "Sự hiện diện của bạn sẽ làm cho buổi tiệc thêm ý nghĩa và vui vẻ.
+            Chúng tôi rất mong được gặp bạn trong ngày đặc biệt này!"
+          </div>
+
+          <a
+            href="#"
+            class="rsvp-button"
+            onclick="alert('Cảm ơn bạn đã xác nhận tham dự!'); return false;"
+          >
+            Xác Nhận Tham Dự
+          </a>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
